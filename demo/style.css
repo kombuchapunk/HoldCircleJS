@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=swap');
+body {
+    font-family: 'Syne', sans-serif;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 0;
+    border: 10px solid black;
+}
+
+header, footer {
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+main {
+    margin: 10px;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+
+h1 {
+    font-weight: 800;
+    font-size: 2em;
+    border-bottom: 2px solid black;
+}
+h2 {
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+section {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+pre, code {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+}
+
+code {
+    line-height: 25px;
+}
+
+/* Responsive grid layout */
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+    main {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}

@@ -1,0 +1,98 @@
+<!-- index.html -->
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>HoldCircleJS - Interactive Radial Progress Indicator</title>
+  <link rel="shortcut icon" href="#" />
+  <script type="module" src="holdcircle.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/neobrutalismcss@latest" />
+</head>
+<!-- <body>
+    <button class="nb-button default" data-holdcircle> Click Here </button>
+  </body> -->
+
+<body>
+  <header class="bg-pale-yellow" data-holdcircle>
+    <h1>HoldCircleJS</h1>
+    <p>Interactive Radial Progress Indicators for Modern Web Applications</p>
+  </header>
+  <main>
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>HoldCircleJS is a lightweight, vanilla JavaScript library designed to create interactive radial progress
+        indicators. Inspired by the bold and raw aesthetic of Neobrutalism, HoldCircleJS offers a unique and engaging
+        way to display progress for user actions like click-and-hold. The library is customizable and easy to integrate
+        into any modern web project.</p>
+    </section>
+    <section id="installation">
+      <h2>Installation</h2>
+      <p>To install HoldCircleJS in your project, use npm:</p>
+      <pre><code>npm install holdcirclejs</code></pre>
+    </section>
+    <section id="usage">
+      <h2>Usage</h2>
+      <p>After installation, include HoldCircleJS in your project:</p>
+      <pre><code>import HoldCircle from 'holdcirclejs';</code></pre>
+      <p>Initialize HoldCircleJS with desired options:</p>
+      <pre><code>
+const holdCircle = new HoldCircle({
+    startDelay: 500, // Delay before starting the fill (ms)
+    fillTime: 2000, // Time to complete the fill (ms)
+    strokeColor: '#ff0000', // Color of the stroke
+    strokeWidth: 8, // Width of the stroke (px)
+    radius: 40, // Radius of the circle (px)
+    callback: function() { console.log('Completed!'); } // Callback function
+});
+            </code></pre>
+    </section>
+    <section id="configuration">
+      <h2>Configuration Options</h2>
+      <p>HoldCircleJS can be customized with the following options:</p>
+      <ul>
+        <li><strong>startDelay</strong> (number): Time in milliseconds before starting the fill (default: 500)</li>
+        <li><strong>fillTime</strong> (number): Time in milliseconds to complete the fill (default: 2000)</li>
+        <li><strong>strokeColor</strong> (string): HEX color of the stroke (default: '#00ff00')</li>
+        <li><strong>strokeWidth</strong> (number): Width of the stroke in pixels (default: 5)</li>
+        <li><strong>radius</strong> (number): Radius of the circle in pixels (default: 30)</li>
+        <li><strong>callback</strong> (function): Function to be called when the progress completes</li>
+      </ul>
+    </section>
+    <section id="callback">
+      <h2>Callback Function</h2>
+      <p>The callback function is executed when the user completes the hold action (i.e., when the radial progress
+        completes). You can define any custom logic in this callback:</p>
+      <pre><code>
+const holdCircle = new HoldCircle({
+    // ... other options ...
+    callback: function() {
+        // Custom logic here
+        alert('Hold action completed!');
+    }
+});
+            </code></pre>
+    </section>
+    <section id="examples">
+      <h2>Examples</h2>
+      <p>Below are three different button examples using HoldCircleJS:</p>
+  
+      <!-- Example 1 -->
+      <button class="nb-button green" data-holdcircle data-holdcircle-color="#40d39c" data-holdcircle-fill="rgba(0,0,0,0)">Hold me</button>
+      <pre><code>&lt;button class="nb-button green" data-holdcircle data-holdcircle-color="#40d39c" data-holdcircle-fill="rgba(0,0,0,0)"&gt;Hold me&lt;/button&gt;</code></pre>
+  
+      <!-- Example 2: Different Color -->
+      <button class="nb-button sky-blue" data-holdcircle data-holdcircle-color="#0077b6" data-holdcircle-fill="rgba(0,119,182,0.25)">Hold me</button>
+      <pre><code>&lt;button class="nb-button sky-blue" data-holdcircle data-holdcircle-color="#0077b6" data-holdcircle-fill="rgba(0,119,182,0.25)"&gt;Hold me&lt;/button&gt;</code></pre>
+  
+      <!-- Example 3: Larger Size -->
+      <button class="nb-button pale-red" data-holdcircle data-holdcircle-color="#ff5733">Hold me</button>
+      <pre><code>&lt;button class="nb-button pale-red" data-holdcircle data-holdcircle-color="#ff5733"&gt;Hold me&lt;/button&gt;</code></pre>
+  </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 HoldCircleJS. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+{
+  "devDependencies": {
+    "esbuild": "0.19.11"
+  },
+  "scripts": {
+    "build": "esbuild src/HoldCircle.js --bundle --outfile=dist/holdcircle.js --loader:.html=text",
+    "watch": "esbuild src/HoldCircle.js --bundle --outfile=dist/holdcircle.js --watch"
+  },
+  "dependencies": {
+    "neobrutalismcss": "^0.5.3"
+  },
+  "name": "holdcirclejs",
+  "version": "1.0.1",
+  "description": "HoldCircleJS is a lightweight, vanilla JavaScript library designed to create interactive radial progress indicators. Inspired by the bold and raw aesthetic of Neobrutalism, HoldCircleJS offers a unique and engaging way to display progress for user actions like click-and-hold.",
+  "main": "dist/holdcircle.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MishaPetrov/HoldCircleJS.git"
+  },
+  "keywords": [
+    "hold",
+    "circle",
+    "js",
+    "circle",
+    "js",
+    "touch",
+    "library",
+    "touch",
+    "library",
+    "js",
+    "press",
+    "press",
+    "and",
+    "hold",
+    "touch",
+    "and",
+    "hold",
+    "press",
+    "indicator",
+    "radial",
+    "progress"
+  ],
+  "author": "Misha Petrov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MishaPetrov/HoldCircleJS/issues"
+  },
+  "homepage": "https://github.com/MishaPetrov/HoldCircleJS#readme"
+}

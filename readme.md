@@ -45,7 +45,7 @@ const holdCircle = new HoldCircle({
 });
 ```
 
-## Advanced example (multiple )
+## Advanced example
 
 ```html
 

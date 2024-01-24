@@ -10,7 +10,7 @@
     "neobrutalismcss": "^0.5.3"
   },
   "name": "holdcirclejs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "HoldCircleJS is a lightweight, vanilla JavaScript library designed to create interactive radial progress indicators. Inspired by the bold and raw aesthetic of Neobrutalism, HoldCircleJS offers a unique and engaging way to display progress for user actions like click-and-hold.",
   "main": "dist/holdcircle.js",
   "repository": {

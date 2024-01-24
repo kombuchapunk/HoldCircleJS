@@ -11,9 +11,13 @@
       this.callback = options.callback || function() {
       };
       this.global = options.global || false;
+      this.elClass = options.elClass || "";
+      this.ignoreClass = options.ignoreClass || [];
       this.easingFunction = options.easingFunction || function(t) {
         return t;
       };
+      this.text = options.text || "";
+      this.textClass = options.textClass || "";
       this.timeoutId = null;
       this.intervalId = null;
       this.progress = 0;
@@ -41,29 +45,43 @@
       this.canvas.height = window.innerHeight;
     }
     attachEventListeners() {
-      const eventListenerTarget = this.global ? document : document.querySelectorAll("[data-holdcircle]");
+      let eventListenerTarget;
+      if (this.global) {
+        eventListenerTarget = document;
+      } else if (this.elClass) {
+        eventListenerTarget = document.querySelectorAll(`.${this.elClass}[data-holdcircle]`);
+      } else {
+        eventListenerTarget = document.querySelectorAll("[data-holdcircle]");
+      }
       const addListeners = (element) => {
-        element.addEventListener("mousedown", (event) => {
-          const target = event.target;
-          const strokeColor = target.getAttribute("data-holdcircle-color") || this.strokeColor;
-          const fillColor = target.getAttribute("data-holdcircle-fill") || this.fillColor;
-          this.timeoutId = setTimeout(() => this.startFill(event.clientX, event.clientY, strokeColor, fillColor), this.startDelay);
-        });
-        element.addEventListener("mouseup", () => {
-          clearTimeout(this.timeoutId);
-          clearInterval(this.intervalId);
-          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-          if (this.progress >= 100) {
-            this.callback();
-          }
-          this.progress = 0;
-        });
+        element.addEventListener("mousedown", (event) => this.handleStart(event, event.clientX, event.clientY));
+        element.addEventListener("mouseup", () => this.handleEnd());
+        element.addEventListener("touchstart", (event) => {
+          const touch = event.touches[0];
+          this.handleStart(event, touch.clientX, touch.clientY);
+        }, { passive: true });
+        element.addEventListener("touchend", () => this.handleEnd(), { passive: true });
       };
       if (this.global) {
         addListeners(eventListenerTarget);
       } else {
         eventListenerTarget.forEach(addListeners);
       }
+    }
+    handleStart(event, x, y) {
+      const target = event.target;
+      if (this.ignoreClass.some((className) => target.closest(`.${className}`))) {
+        return;
+      }
+      const strokeColor = target.getAttribute("data-holdcircle-color") || this.strokeColor;
+      const fillColor = target.getAttribute("data-holdcircle-fill") || this.fillColor;
+      this.timeoutId = setTimeout(() => this.startFill(x, y, strokeColor, fillColor), this.startDelay);
+    }
+    handleEnd() {
+      clearTimeout(this.timeoutId);
+      clearInterval(this.intervalId);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.progress = 0;
     }
     startFill(x, y, strokeColor, fillColor) {
       this.centerX = x;
@@ -78,6 +96,8 @@
       if (this.progress > 100) {
         clearInterval(this.intervalId);
         this.progress = 100;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.callback();
       } else {
         this.drawCircle();
       }
@@ -94,22 +114,22 @@
       this.ctx.strokeStyle = this.currentStrokeColor;
       this.ctx.lineWidth = this.strokeWidth;
       this.ctx.lineCap = "round";
+      this.ctx.shadowBlur = 1;
       this.ctx.stroke();
+      if (this.text) {
+        this.ctx.font = this.getFontStyle(this.textClass);
+        this.ctx.fillStyle = this.currentStrokeColor;
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillText(this.text, this.centerX, this.centerY);
+      }
+    }
+    getFontStyle(className) {
+      if (className === "large") {
+        return "14px Syne";
+      }
+      return "9px Syne";
     }
   };
-  var holdCircle = new HoldCircle({
-    startDelay: 500,
-    fillTime: 1e3,
-    strokeColor: "#ff0000",
-    fillColor: "rgba(255, 0, 0, 0.1)",
-    strokeWidth: 5,
-    radius: 25,
-    global: false,
-    // Set to true for global, false for data-holdcircle elements
-    easingFunction: (t) => t * (2 - t),
-    // Example ease-out quadratic
-    callback: function() {
-      alert("Hold circle complete!");
-    }
-  });
+  window.HoldCircle = HoldCircle;
 })();

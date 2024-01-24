@@ -3,18 +3,39 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>HoldCircleJS - Interactive Radial Progress Indicator</title>
   <link rel="shortcut icon" href="#" />
-  <script type="module" src="holdcircle.js"></script>
+  <script src="holdcircle.js"></script>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/neobrutalismcss@latest" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoldCircleJS - Interactive Radial Progress Indicator</title>
+  <meta name="description"
+    content="HoldCircleJS is a lightweight, vanilla JavaScript library for creating interactive radial progress indicators, inspired by Neobrutalism.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://holdcirclejs.web.app/">
+  <meta property="og:title" content="HoldCircleJS - Interactive Radial Progress Indicator">
+  <meta property="og:description"
+    content="HoldCircleJS is a lightweight, vanilla JavaScript library for creating interactive radial progress indicators, inspired by Neobrutalism.">
+  <meta property="og:image" content="https://holdcirclejs.web.app/og.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://holdcirclejs.web.app/">
+  <meta property="twitter:title" content="HoldCircleJS - Interactive Radial Progress Indicator">
+  <meta property="twitter:description"
+    content="HoldCircleJS is a lightweight, vanilla JavaScript library for creating interactive radial progress indicators, inspired by Neobrutalism.">
+  <meta property="twitter:image" content="https://holdcirclejs.web.app/og.jpg">
 </head>
 <!-- <body>
     <button class="nb-button default" data-holdcircle> Click Here </button>
   </body> -->
 
 <body>
-  <header class="bg-pale-yellow" data-holdcircle>
+  <header class="bg-pale-yellow">
     <h1>HoldCircleJS</h1>
     <p>Interactive Radial Progress Indicators for Modern Web Applications</p>
   </header>
@@ -37,14 +58,21 @@
       <pre><code>import HoldCircle from 'holdcirclejs';</code></pre>
       <p>Initialize HoldCircleJS with desired options:</p>
       <pre><code>
-const holdCircle = new HoldCircle({
-    startDelay: 500, // Delay before starting the fill (ms)
-    fillTime: 2000, // Time to complete the fill (ms)
-    strokeColor: '#ff0000', // Color of the stroke
-    strokeWidth: 8, // Width of the stroke (px)
-    radius: 40, // Radius of the circle (px)
-    callback: function() { console.log('Completed!'); } // Callback function
-});
+        const holdCircle = new HoldCircle({
+          startDelay: 500, // Delay before starting the fill (milliseconds)
+          fillTime: 2000, // Time to complete the fill (milliseconds)
+          strokeColor: '#ff0000', // Color of the stroke
+          fillColor: 'rgba(255, 0, 0, 0.5)', // Fill color inside the circle (optional)
+          strokeWidth: 8, // Width of the stroke (pixels)
+          radius: 40, // Radius of the circle (pixels)
+          global: false, // True for entire page, false for elements with data-holdcircle attribute
+          elClass: 'custom-class', // Class name to target specific elements (optional)
+          ignoreClass: ['ignore-me'], // Array of class names to ignore (optional)
+          text: 'Loading', // Text to display inside the circle (optional)
+          textClass: 'text-style', // Class name for text styling (optional)
+          easingFunction: (t) => t * (2 - t), // Custom easing function (optional)
+          callback: function() { console.log('Completed!'); } // Callback function to execute when the fill is complete
+      });      
             </code></pre>
     </section>
     <section id="configuration">
@@ -54,8 +82,16 @@ const holdCircle = new HoldCircle({
         <li><strong>startDelay</strong> (number): Time in milliseconds before starting the fill (default: 500)</li>
         <li><strong>fillTime</strong> (number): Time in milliseconds to complete the fill (default: 2000)</li>
         <li><strong>strokeColor</strong> (string): HEX color of the stroke (default: '#00ff00')</li>
+        <li><strong>fillColor</strong> (string): Fill color inside the circle (optional)</li>
         <li><strong>strokeWidth</strong> (number): Width of the stroke in pixels (default: 5)</li>
         <li><strong>radius</strong> (number): Radius of the circle in pixels (default: 30)</li>
+        <li><strong>global</strong> (boolean): True for entire page, false for elements with data-holdcircle attribute
+          (default: false)</li>
+        <li><strong>elClass</strong> (string): Class name to target specific elements (optional)</li>
+        <li><strong>ignoreClass</strong> (array of strings): Array of class names to ignore (optional)</li>
+        <li><strong>text</strong> (string): Text to display inside the circle (optional)</li>
+        <li><strong>textClass</strong> (string): Class name for text styling (optional)</li>
+        <li><strong>easingFunction</strong> (function): Custom easing function for the animation (optional)</li>
         <li><strong>callback</strong> (function): Function to be called when the progress completes</li>
       </ul>
     </section>
@@ -76,23 +112,102 @@ const holdCircle = new HoldCircle({
     <section id="examples">
       <h2>Examples</h2>
       <p>Below are three different button examples using HoldCircleJS:</p>
-  
-      <!-- Example 1 -->
-      <button class="nb-button green" data-holdcircle data-holdcircle-color="#40d39c" data-holdcircle-fill="rgba(0,0,0,0)">Hold me</button>
+
+      <!-- Example 1: alert -->
+      <button class="nb-button green rounded hold-circle-alert" data-holdcircle data-holdcircle-color="#40d39c"
+        data-holdcircle-fill="rgba(0,0,0,0)">Hold me to see what I do</button>
       <pre><code>&lt;button class="nb-button green" data-holdcircle data-holdcircle-color="#40d39c" data-holdcircle-fill="rgba(0,0,0,0)"&gt;Hold me&lt;/button&gt;</code></pre>
-  
-      <!-- Example 2: Different Color -->
-      <button class="nb-button sky-blue" data-holdcircle data-holdcircle-color="#0077b6" data-holdcircle-fill="rgba(0,119,182,0.25)">Hold me</button>
+
+      <!-- Example 2: modal -->
+      <button class="nb-button sky-blue rounded hold-circle-modal" data-holdcircle data-holdcircle-color="#0077b6"
+        data-holdcircle-fill="rgba(0,119,182,0.25)">Hold me to see what I do</button>
       <pre><code>&lt;button class="nb-button sky-blue" data-holdcircle data-holdcircle-color="#0077b6" data-holdcircle-fill="rgba(0,119,182,0.25)"&gt;Hold me&lt;/button&gt;</code></pre>
-  
-      <!-- Example 3: Larger Size -->
-      <button class="nb-button pale-red" data-holdcircle data-holdcircle-color="#ff5733">Hold me</button>
+
+      <!-- Example 3: color -->
+      <button class="nb-button pale-red rounded" data-holdcircle data-holdcircle-color="#ff5733">Hold me</button>
       <pre><code>&lt;button class="nb-button pale-red" data-holdcircle data-holdcircle-color="#ff5733"&gt;Hold me&lt;/button&gt;</code></pre>
-  </section>
+    </section>
+
+    <input type="checkbox" id="modal">
+    <label for="modal" class="modal-background"></label>
+    <div class="modal dialog">
+      <div class="modal-header">
+        <h3>Nice click!</h3>
+        <label for="modal" class="close"></label>
+      </div>
+      <p>Secret message was copied to clipboard :)</p>
+    </div>
+
   </main>
+
+  <div class="alert warning fixed-bottom">
+    <p>You can add any custom actions on complete hold for <b>HoldCircle</b> using the callback function! :)</p>
+  </div>
   <footer>
     <p>&copy; 2024 HoldCircleJS. All rights reserved.</p>
   </footer>
+
+  <script>
+
+    const addToClipboard = () => {
+      navigator.clipboard.writeText("I love HoldCircleJS! :)");
+    }
+
+    const openModal = () => {
+      addToClipboard();
+      document.querySelector('#modal').checked = true;
+    }
+
+    const showAlert = () => {
+      document.querySelector('.alert.fixed-bottom').classList.add('show');
+      setTimeout(() => {
+        document.querySelector('.alert.fixed-bottom').classList.remove('show');
+      }, 3000)
+    }
+
+    // HoldCircle with a callback
+    const holdCircleModal = new HoldCircle({
+      startDelay: 500,
+      fillTime: 750,
+      strokeColor: '#ff0000',
+      fillColor: 'rgba(255, 0, 0, 0.1)',
+      strokeWidth: 6,
+      radius: 32,
+      elClass: "hold-circle-modal",
+      global: false, // Set to true for global, false for data-holdcircle elements
+      easingFunction: (t) => t * (2 - t), // Example ease-out quadratic
+      callback: openModal
+    });
+
+    // HoldCircle with another callback
+    const holdCircleAlert = new HoldCircle({
+      startDelay: 500,
+      fillTime: 750,
+      strokeColor: '#ff0000',
+      fillColor: 'rgba(255, 0, 0, 0.1)',
+      strokeWidth: 6,
+      radius: 32,
+      elClass: "hold-circle-alert",
+      global: false, // Set to true for global, false for data-holdcircle elements
+      easingFunction: (t) => t * (2 - t), // Example ease-out quadratic
+      callback: showAlert
+    });
+
+    // Global HoldCircle with ignores
+    const holdCircleGlobal = new HoldCircle({
+      startDelay: 500,
+      fillTime: 750,
+      strokeColor: '#fdfd96',
+      fillColor: '#ffc5c8',
+      strokeWidth: 10,
+      radius: 50,
+      global: true, // Set to true for global, false for data-holdcircle elements,
+      ignoreClass: ["hold-circle-alert", "hold-circle-modal"],
+      text: ":)",
+      easingFunction: (t) => t * (2 - t), // Example ease-out quadratic
+    });
+
+  </script>
 </body>
 
 </html>

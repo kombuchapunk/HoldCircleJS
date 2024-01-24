@@ -70,3 +70,23 @@ main {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 }
+
+.modal, .modal-background {
+    transition: 0.2s all;
+}
+
+.modal {
+    height: 170px !important;
+}
+
+.alert.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: none;
+}
+
+.alert.fixed-bottom.show {
+    display: block;
+}

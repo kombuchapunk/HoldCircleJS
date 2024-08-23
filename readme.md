@@ -21,6 +21,8 @@ Install HoldCircleJS using npm:
 npm install holdcirclejs
 ```
 
+[![YouTube](http://i.ytimg.com/vi/AJ7lbqyLbX8/hqdefault.jpg)](https://www.youtube.com/watch?v=AJ7lbqyLbX8)
+
 ## Usage
 
 Import HoldCircleJS and initialize it with desired options:
